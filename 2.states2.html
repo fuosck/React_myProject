@@ -1,0 +1,52 @@
+﻿<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习子组件</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+		var ClickApp = React.createClass({
+				//初始化一个新的状态
+				getInitialState:function(){
+					return {
+						clickCount: 0,
+					}
+				},
+				//一个触发函数
+				handleClick:function(){
+					this.setState({
+						clickCount: this.state.clickCount + 1,
+					})
+				},
+
+				//render 即是该class(组件) 的渲染效果
+				render:function(){
+					//return 返回页面用() 返回的是动作用{}？
+					return (
+						<div>
+							<h2>点击下面按钮</h2>
+							<button onClick={this.handleClick}>点击了我</button>
+							<p>你一共点击了：{this.state.clickCount}</p>
+						</div>
+					)
+				}
+		});
+
+		//最终渲染到页面的组件  React.render!!! 给一个 var clickComponent 是为了在前台输入，直接改变！可以去掉
+		//在前台可以输入  clickComponent.setState({clickCount: 11})  来实时改变页面的值！
+		var clickComponent = React.render(
+			<ClickApp/>,  //组件可以通过该方式导入
+			document.getElementById('app')
+		);
+
+	</script>
+
+
+</body>
+
+</html>

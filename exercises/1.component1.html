@@ -1,0 +1,87 @@
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>Day Day Up</title>
+</head>
+<body>
+	<div id='app'></div>
+	<script src='../bower_components/react/react.js'></script>
+	<script src="../bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+		
+
+		var MessageBox = React.createClass({
+			alertMe:function(){
+				alert("hehe");
+			},
+			render:function(){
+				return ( 
+					<div>
+						<h1 onClick={this.alertMe}>你好世界</h1> 
+					</div>
+				)
+			}
+		});
+
+		var ColorDemo = React.createClass({   //首字母必须大写！
+			// getInitialState:function(){
+			// 	return {
+			// 		hhcolor:'red',
+			// 	}
+			// },
+
+			// changeColor:function(){
+			// 	this.setState({
+			// 		hhcolor:'#eee',
+			// 	}),
+			// }
+
+			render:function(){
+				// var styleObj = {
+				// 	color:this.state.hhcolor,
+				// }
+				return (
+					<div>
+						<h1 style={{color:"red"}}>点我变色</h1>
+					</div>
+				)
+			}
+
+		});
+
+		var ChangeColorApp = React.createClass({
+
+			getInitialState:function(){
+				return{
+					changeColor:true,
+				}
+			},
+
+			clickMe:function(){
+				this.setState({
+					changeColor: !this.state.changeColor,
+				})
+			},
+
+			render:function(){
+				var stayleObj={
+					color:this.state.changeColor ? "#eee" : "blue",
+				}
+
+				return(
+					<div>
+						<h1 style={stayleObj} onClick={this.clickMe}>点我变颜色哦！</h1>
+					</div>
+				)
+			}
+		});
+
+		React.render(
+			<ChangeColorApp/>,
+			document.getElementById('app')   
+		)
+
+
+	</script>
+</body>
+</html>

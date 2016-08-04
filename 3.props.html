@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>学习子组件</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+		var MessageBox = React.createClass({
+
+			alertMe:function(){
+					alert('懂了没？');
+				},
+
+			getInitialState:function(){
+				return{
+					isVisible:true,
+					titleMessage: '你好世界(来自state哈)',
+				}
+					
+			},
+
+			render:function(){
+
+				var styleObj={
+					display:this.state.isVisible ? 'block' : 'none',
+				}
+				return ( 
+					<div>
+						<h1 style={styleObj} onClick={this.alertMe}>{this.state.titleMessage}</h1> 
+					</div>
+				)
+			}
+		});
+
+		var Submessage = React.createClass({
+			render:function(){
+				return (
+					<div>
+						<h3>写代码很有意思</h3>
+						<Footer/>
+					</div>
+				)
+			}
+
+		});
+
+		var messageBox = React.render( <MessageBox/>, 
+			document.getElementById('app'),
+			function(){
+				console.log('渲染完成啦！！');
+			}
+		)
+
+
+	</script>
+
+
+</body>
+
+</html>

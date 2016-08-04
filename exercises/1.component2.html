@@ -1,0 +1,47 @@
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>Day Day Up</title>
+</head>
+<body>
+	<div id='app'></div>
+	<script src='../bower_components/react/react.js'></script>
+	<script src="../bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+		var ChangeColorApp = React.createClass({
+
+			getInitialState:function(){
+				
+				return{
+					changeColor:true,
+				}
+			},
+
+			clickMe:function(){
+				this.setState({
+					changeColor: !this.state.changeColor
+				})
+			},
+
+			render:function(){
+				var stayleObj={
+					color:this.state.changeColor ? "blue" : "red",
+				}
+
+				return(
+					<div>
+						<h1 style={stayleObj} onClick={this.clickMe}>点我变颜色哦！</h1>
+					</div>
+				)
+			}
+		});
+
+		React.render(
+			<ChangeColorApp/>,
+			document.getElementById('app')   
+		)
+
+
+	</script>
+</body>
+</html>

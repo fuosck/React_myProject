@@ -1,10 +1,8 @@
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>学习子组件</title>
 </head>
-
 <body>
     <div id="app"></div>
     <script src="bower_components/react/react.js"></script>
@@ -12,54 +10,64 @@
 	<script type="text/jsx">
 		var MessageBox = React.createClass({
 
-			alertMe:function(){
-					alert('懂了没？');
-				},
-
 			getInitialState:function(){
 				return{
-					isVisible:true,
-					titleMessage: '你好世界(来自state哈)',
+					
+					submessages:[
+						'人生本就这样',
+						'所有的希望',
+						'终将成为失误...'
+					]
 				}
 					
 			},
 
 			render:function(){
-
-				var styleObj={
-					display:this.state.isVisible ? 'block' : 'none',
-				}
 				return ( 
 					<div>
-						<h1 style={styleObj} onClick={this.alertMe}>{this.state.titleMessage}</h1> 
+						<h1>{this.props.title}</h1>   //获取参数title
+						<Submessage messages={this.state.submessages} />
+						<Submessage />
 					</div>
 				)
 			}
 		});
 
-		var Submessage = React.createClass({
+		var Submessage = React.createClass({   //子组件通过props从父组件获取参数
+			//验证格式是否正确
+			propTypes:{
+				messages:React.PropTypes.array.isRequired,  //传进来的必须为数组
+			},
+
+			//需要验证，是否有参数过来
+			getDefaultProps:function(){
+				return {
+					messages:['啥的没有说'],
+				}
+			},
+
 			render:function(){
+				var msgs = [];
+				this.props.messages.forEach(function(msg,index){    //从标签中传入参数！  
+					msgs.push(
+						<p>大师说：{msg}</p>
+					)
+				});
 				return (
-					<div>
-						<h3>写代码很有意思</h3>
-						<Footer/>
-					</div>
+					<div>{msgs}</div>
 				)
 			}
 
 		});
 
-		var messageBox = React.render( <MessageBox/>, 
+		var title = '来自props参数哦！';
+
+		var messageBox = React.render( <MessageBox title={title}/>, 
 			document.getElementById('app'),
 			function(){
 				console.log('渲染完成啦！！');
 			}
 		)
-
-
 	</script>
-
-
 </body>
-
 </html>

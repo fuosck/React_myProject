@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>学习子组件</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../bower_components/react/react.js"></script>
+    <script src="../bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+	var TodoList = React.createClass({
+		render:function(){
+			var createItem = function(itemText){
+				return (
+					<li>{itemText}</li>
+				)
+			};
+			return(
+				<ul>{this.props.items.map(createItem)}</ul>       //给该子组件添加一个props参数items
+			)
+		}
+	});
+
+
+	var TodoApp = React.createClass({
+		//设置一个状态，里面放入两个参数
+		getInitialState:function(){
+			return {
+				items:[],
+				text:''   //随输入框改变而变
+			};
+		},
+
+		textChange:function(e){
+			//this.setState.text=e.target.value;
+			this.setState({'text':e.target.value});
+		},
+
+		handleSubmit:function(e){
+			e.preventDefault(); //
+			var text = this.state.text;
+			var nextItems = this.state.items.concat([text]);
+			this.setState({'items':nextItems,'text':''});
+
+		},
+		render:function(){
+			return(
+				<div>
+					<h3>TodoApp</h3>
+					<TodoList items={this.state.items} />
+					<form onSubmit={this.handleSubmit}>
+						<input onChange={this.textChange} value={this.state.text} />
+						<button>{'Add #' + (this.state.items.length + 1)}</button>
+					</form>
+				</div>
+			);
+		}	
+	});	
+
+	//在React.render加变量 可以通过console上面 box.state.text  等等
+	var box = React.render(
+				<TodoApp />,
+				document.getElementById('app'),
+				function(){
+					console.log('Render complete!');
+				}
+			);
+
+	</script>
+</body>
+</html>

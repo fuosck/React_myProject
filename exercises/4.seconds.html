@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>定时器</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../bower_components/react/react.js"></script>
+    <script src="../bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+	var SecondsApp = React.createClass({
+
+		getInitialState: function(){
+			return{secondsElapsed : 0};
+		},
+
+		tick: function(){
+			this.setState({secondsElapsed : this.state.secondsElapsed + 1});
+		},
+
+		//componentDidMount 组件渲染完成 已经出现在dom文档里!
+		componentDidMount : function(){
+			//构造一个定时器！触发tick事件
+			this.interval = setInterval(this.tick, 1000);
+		},
+
+		//componentWillUnmount 组件就是dom还没有渲染到html文件里面
+		componentWillUnmount : function(){
+			clearInterval(this.interval);
+		},
+
+		render:function(){
+
+			return(
+				<div>Seconds Elapsed: {this.state.secondsElapsed}</div>
+			);
+		}
+	});
+
+	React.render(
+		<SecondsApp/>,
+		document.getElementById('app'),
+		function(){
+			console.log('完成渲染');
+		}
+	);
+
+	</script>
+</body>
+</html>

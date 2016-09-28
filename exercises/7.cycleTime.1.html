@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>cycle time</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../bower_components/react/react.js"></script>
+    <script src="../bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+	
+    var ChangeOpacity = React.createClass({
+    	getInitialState:function(){
+    		return{
+    			opacity:1.0
+    		};
+    	},
+
+    	ticker:function(){
+    		var opacity = this.state.opacity;
+			opacity -= 0.04;
+			if(opacity < 0.1){
+				opacity = 1.0
+			}
+			this.setState({
+				opacity:opacity
+			});
+    	},
+
+    	componentDidMount:function(){	
+    		this.timer = setInterval(this.ticker, 100);
+    	},
+
+    	render:function(){
+    		return(
+    			<div style={{opacity: this.state.opacity}}>
+    				{this.props.name}
+    			</div>
+    		)
+    	}
+    });
+
+	React.render(
+		<ChangeOpacity name="hahahahaha"/>,
+		document.body
+	)
+
+	</script>
+</body>
+</html>

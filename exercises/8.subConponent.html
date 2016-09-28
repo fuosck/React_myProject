@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>cycle time</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="../bower_components/react/react.js"></script>
+    <script src="../bower_components/react/JSXTransformer.js"></script>
+	<script type="text/jsx">
+	
+	var Search = React.createClass({
+		render:function(){
+			return(
+				<div>
+					{this.props.contentType}:<input type="text" />
+					<input type="button" value='Search'></input>
+				</div>
+			)
+		}
+		
+	});
+
+	var SearchApp = React.createClass({
+		render:function(){
+			return(
+				<div>
+					<Search contentType="title" />
+					<Search contentType="content" />
+				</div>
+				
+			)
+		}
+	});
+    
+
+	React.render(
+		<SearchApp/>,
+		document.getElementById("app")
+	)
+
+	</script>
+</body>
+</html>
